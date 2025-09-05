@@ -9,16 +9,17 @@
 /* Global body styling */
 html,
 body {
-  @apply bg-gray-100 text-gray-900 font-sans min-h-screen;
+  @apply font-sans min-h-screen text-gray-100;
+}
 
-  @media (prefers-color-scheme: dark) {
-    @apply bg-gray-900 text-gray-100;
-  }
+/* Global body gradient for all screens */
+.bg-coffee-gradient {
+  background: linear-gradient(to bottom right, #fbf1e3ff, #cdb690ff, #a78c5eff);
 }
 
 /* Card for each user row */
 .user-card {
-  @apply bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex items-center justify-between;
+  @apply bg-[#fdf6ec] text-gray-900 rounded-2xl shadow-lg p-6 flex items-center justify-between;
 }
 
 /* Buttons */
@@ -27,20 +28,17 @@ body {
 }
 
 .button-plus {
-  @apply bg-green-500 text-white hover:bg-green-600;
+  @apply bg-green-300 text-white hover:bg-green-500;
 }
 
 .button-minus {
-  @apply bg-red-500 text-white hover:bg-red-600;
-}
-
-.button-disabled {
-  @apply bg-gray-300 text-gray-500 cursor-not-allowed;
+  @apply bg-red-300 text-white hover:bg-red-500;
 }
 
 /* Header */
 h1 {
-  @apply text-4xl font-bold text-center mb-6;
+  @apply text-6xl font-bold text-center mb-6 text-gray-800;
+  font-family: 'Birthstone', cursive;
 }
 
 /* Optional: spacing for container */
