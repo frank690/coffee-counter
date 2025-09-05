@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+/* Global font */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* Global body styling */
+html,
+body {
+  @apply bg-gray-100 text-gray-900 font-sans min-h-screen;
+
+  @media (prefers-color-scheme: dark) {
+    @apply bg-gray-900 text-gray-100;
+  }
+}
+
+/* Card for each user row */
+.user-card {
+  @apply bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex items-center justify-between;
+}
+
+/* Buttons */
+.button {
+  @apply px-4 py-2 rounded font-semibold transition-colors duration-200;
+}
+
+.button-plus {
+  @apply bg-green-500 text-white hover:bg-green-600;
+}
+
+.button-minus {
+  @apply bg-red-500 text-white hover:bg-red-600;
+}
+
+.button-disabled {
+  @apply bg-gray-300 text-gray-500 cursor-not-allowed;
+}
+
+/* Header */
+h1 {
+  @apply text-4xl font-bold text-center mb-6;
+}
+
+/* Optional: spacing for container */
+.container {
+  @apply max-w-3xl mx-auto p-4;
+}

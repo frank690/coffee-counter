@@ -1,0 +1,36 @@
+"""
+Defining API routes.
+"""
+
+from fastapi import APIRouter, HTTPException, Query
+from backend.src.models import User
+from backend.src import xls
+
+router = APIRouter()
+
+
+@router.get("/users", response_model=list[User])
+def get_users() -> list[User]:
+    """
+    Get all users from the spreadsheet.
+
+    Returns:
+        A list of user dictionaries.
+    """
+    return xls.get_users()
+
+
+@router.post("/update")
+def update(uid: str = Query(...), action: str = Query(...)) -> dict:
+    """
+    Update a user's count based on the action.
+    Args:
+        uid: The user ID.
+        action: The action to perform ("plus" or "minus").
+    Returns:
+        Updated user data or raises HTTPException if user not found.
+    """
+    result = xls.update_user(uid, action)
+    if result is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return result
