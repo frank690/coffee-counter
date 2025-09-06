@@ -3,8 +3,8 @@ Defining API routes.
 """
 
 from fastapi import APIRouter, HTTPException, Query
-from backend.src.models import User
-from backend.src import xls
+from src.models import User
+from src import xls
 
 router = APIRouter()
 
