@@ -3,9 +3,9 @@ FROM python:3.12
 WORKDIR /app
 RUN apt-get update && apt-get install -y build-essential
 
-RUN pip install poetry
+RUN pip install poetry && poetry config virtualenvs.create false
 COPY pyproject.toml poetry.lock ./
-RUN poetry install --no-dev --no-interaction --no-ansi
+RUN poetry install
 
 COPY . .
 EXPOSE 8000
