@@ -8,8 +8,11 @@ __all__ = ["initialize_spreadsheet", "get_users", "user_buys_coffee"]
 import os
 from openpyxl import Workbook, load_workbook
 from datetime import datetime
+from dotenv import load_dotenv
 
-EXCEL_FILE = "data.xlsx"
+load_dotenv()
+
+EXCEL_FILE = os.getenv("EXCEL_FILE", "data.xlsx")
 
 
 def initialize_spreadsheet():

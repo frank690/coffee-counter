@@ -15,3 +15,4 @@ Written in javascript. Using react, vite and tailwind.
 ## running the app via docker
 Simply run `docker-compose up --build` from the repository root.
 Afterwards, the app should be available via `localhost:3000`.
+To sign in as user, pass the corresponding `uid` from the xlsx file (e.g. `localhost:3000/?uid=f4no225g` to sign in as John).
