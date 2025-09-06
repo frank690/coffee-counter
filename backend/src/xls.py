@@ -2,7 +2,7 @@
 Handling Excel file operations.
 """
 
-__all__ = ["initialize_spreadsheet", "get_users", "update_user"]
+__all__ = ["initialize_spreadsheet", "get_users", "user_buys_coffee"]
 
 
 import os
@@ -23,7 +23,7 @@ def initialize_spreadsheet():
         ws_users.append(["uid", "name", "count"])
 
         ws_actions = wb.create_sheet("actions")
-        ws_actions.append(["uid", "name", "action", "date"])
+        ws_actions.append(["uid", "name", "date"])
 
         wb.save(EXCEL_FILE)
 
@@ -54,12 +54,11 @@ def get_users() -> list:
     return users
 
 
-def update_user(uid: str, action: str) -> dict | None:
+def user_buys_coffee(uid: str) -> dict | None:
     """
-    Update a user's count based on the action and log the action.
+    Update a user's coffee count.
     Args:
         uid: The user ID.
-        action: The action to perform ("plus" or "minus").
 
     Returns:
         Updated user data or None if user not found.
@@ -71,16 +70,9 @@ def update_user(uid: str, action: str) -> dict | None:
     for row in ws_users.iter_rows(min_row=2):
         if row[0].value == uid:
             current_count = row[2].value or 0
-            if action == "plus":
-                new_count = current_count + 1
-            elif action == "minus":
-                new_count = max(0, current_count - 1)
-            else:
-                raise ValueError("Invalid action")
-
-            row[2].value = new_count
-            ws_actions.append([uid, row[1].value, action, datetime.now().isoformat()])
+            row[2].value = current_count + 1
+            ws_actions.append([uid, row[1].value, datetime.now().isoformat()])
             wb.save(EXCEL_FILE)
-            return {"uid": uid, "count": new_count}
+            return {"uid": uid, "count": row[2].value}
 
     return None

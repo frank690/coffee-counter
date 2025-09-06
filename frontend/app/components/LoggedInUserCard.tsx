@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Plus } from "lucide-react";
+import { Coffee } from "lucide-react";
 import { Button } from "./Button";
 import { UserCard } from "./UserCard";
 
@@ -14,7 +14,7 @@ export function LoggedInUserCard({
   onUpdate,
 }: {
   user: User;
-  onUpdate: (uid: string, action: "plus" | "minus") => void;
+  onUpdate: (uid: string) => void;
 }) {
   return (
     <div className="flex gap-4">
@@ -28,11 +28,11 @@ export function LoggedInUserCard({
       >
         <Button 
           variant="plus" 
-          onClick={() => onUpdate(user.uid, "plus")}
+          onClick={() => onUpdate(user.uid)}
           className="w-full h-full flex justify-center items-center"
         >
           <motion.div whileTap={{ scale: 0.9 }}>
-            <Plus className="w-6 h-6" />
+            <Coffee className="w-6 h-6" />
           </motion.div>
         </Button>
       </motion.div>

@@ -15,5 +15,4 @@ class User(BaseModel):
 class Action(BaseModel):
     uid: str
     name: str
-    action: str
     date: str

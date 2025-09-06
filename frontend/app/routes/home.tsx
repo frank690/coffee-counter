@@ -54,12 +54,12 @@ export default function Home() {
   }, []);
 
 
-  const handleUpdate = async (userUid: string, action: "plus" | "minus") => {
+  const handleUpdate = async (userUid: string) => {
     if (uid !== userUid) return; // safeguard
 
     try {
       const res = await fetch(
-        `${API_URL}/update?uid=${uid}&action=${action}`,
+        `${API_URL}/update?uid=${uid}`,
         { method: "POST" }
       );
       if (!res.ok) throw new Error("Failed to update");
