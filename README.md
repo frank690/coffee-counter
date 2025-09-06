@@ -1,7 +1,7 @@
 # ☕ coffee-counter
 > A simple webapp to count the coffee consumption among colleagues
 
-![Coffee Counter Screenshot](./media/screenshot.png "Coffee Counter Screenshot")
+<img src="./media/screenshot.png" width="50%">
 
 Check out the backend and frontend `README` files for installation instructions.
 Start the backend service before the frontend service.
