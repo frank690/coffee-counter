@@ -11,3 +11,7 @@ Written in Python. Using fastapi to handle requests to the webapp. Data is store
 
 ## frontend
 Written in javascript. Using react, vite and tailwind.
+
+## running the app via docker
+Simply run `docker-compose up --build` from the repository root.
+Afterwards, the app should be available via `localhost:3000`.
