@@ -1,9 +1,9 @@
 import type { Route } from "./+types/home";
-import { Button } from "../components/Button";
-import { PageWrapper } from "../components/PageWrapper";
+import { PageWrapper } from "~/components/PageWrapper";
+import { UserCard } from "~/components/UserCard";
+import { LoggedInUserCard } from "~/components/LoggedInUserCard";
 import { useEffect, useState } from "react";
-import { Plus, Minus } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -41,7 +41,9 @@ export default function Home() {
         return res.json();
       })
       .then((data: User[]) => {
-        setUsers(data);
+        // Sort by count (highest first)
+        const sorted = data.sort((a, b) => b.count - a.count);
+        setUsers(sorted);
         setLoading(false);
       })
       .catch((err) => {
@@ -73,7 +75,6 @@ export default function Home() {
     }
   };
 
-
   const [minLoading, setMinLoading] = useState(true);
 
   useEffect(() => {
@@ -87,67 +88,27 @@ export default function Home() {
     );
   }
 
-
   return (
     <PageWrapper>
       <div className="w-full max-w-xl space-y-4">
         <AnimatePresence>
+          {/* Logged-in user first with + button */}
+          {uid &&
+            users
+              .filter((user) => user.uid === uid)
+              .map((user) => (
+                <LoggedInUserCard
+                  key={`top-${user.uid}`}
+                  user={user}
+                  onUpdate={handleUpdate}
+                />
+              ))}
+
+          {uid && <div className="h-2" />}  {/* Vertical spacer */}
+
+          {/* Full sorted list (logged-in user included again) */}
           {users.map((user) => (
-            <motion.div
-              key={user.uid}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="user-card"
-            >
-              <span className="text-2xl font-semibold select-none">{user.name.charAt(0).toUpperCase() + user.name.slice(1)}</span>
-              <div className="flex items-center space-x-4">
-                {uid === user.uid ? (
-                  <div className="flex items-center gap-3">
-                    <Button
-                      variant="minus"
-                      onClick={() => handleUpdate(user.uid, "minus")}
-                      asChild
-                    >
-                      <motion.div whileTap={{ scale: 0.9 }}>
-                        <Minus className="w-5 h-5" />
-                      </motion.div>
-                    </Button>
-
-                    <motion.span
-                      key={user.count}
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.2 }}
-                      className="text-2xl font-bold w-12 text-center select-none"
-                    >
-                      {user.count}
-                    </motion.span>
-
-                    <Button
-                      variant="plus"
-                      onClick={() => handleUpdate(user.uid, "plus")}
-                      asChild
-                    >
-                      <motion.div whileTap={{ scale: 0.9 }}>
-                        <Plus className="w-5 h-5" />
-                      </motion.div>
-                    </Button>
-                  </div>
-                ) : (
-                  <motion.span
-                    key={user.count}
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.2 }}
-                    className="font-bold text-2xl w-12 text-center"
-                  >
-                    {user.count}
-                  </motion.span>
-                )}
-              </div>
-            </motion.div>
+            <UserCard key={user.uid} user={user} />
           ))}
         </AnimatePresence>
       </div>
