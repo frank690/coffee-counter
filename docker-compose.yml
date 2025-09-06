@@ -8,6 +8,10 @@ services:
     container_name: coffee-backend
     ports:
       - "8000:8000"
+    volumes:
+      - ./data.xlsx:/app/data.xlsx   # Mount example Excel file into container
+    environment:
+      - EXCEL_FILE=/app/data.xlsx    # Override path inside container if needed
 
   frontend:
     build:
