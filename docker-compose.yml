@@ -1,13 +1,11 @@
-version: "3.9"
-
 services:
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     container_name: coffee-backend
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     volumes:
       - ./data.xlsx:/app/data.xlsx   # Mount example Excel file into container
     environment:
