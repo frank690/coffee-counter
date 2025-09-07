@@ -4,8 +4,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: coffee-backend
-    expose:
-      - "8000"
+    ports:
+      - "8000:8000"
     volumes:
       - ./data.xlsx:/app/data.xlsx   # Mount example Excel file into container
     environment:
