@@ -23,7 +23,7 @@ export default function Home() {
   const [uid, setUid] = useState<string | null>(null);
 
   // Fetch API URL from environment variable or default to localhost
-  const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
+  const API_URL = "/api";
 
   // Get UID from URL query param
   useEffect(() => {
