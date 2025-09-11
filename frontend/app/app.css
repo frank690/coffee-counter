@@ -31,10 +31,6 @@ body {
   @apply bg-green-400 text-white hover:bg-green-500;
 }
 
-.button-minus {
-  @apply bg-red-400 text-white hover:bg-red-500;
-}
-
 .no-padding {
   @apply p-0;
 }

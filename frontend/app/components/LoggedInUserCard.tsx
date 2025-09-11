@@ -27,9 +27,8 @@ export function LoggedInUserCard({
         className="user-card w-20 flex justify-center items-center no-padding"
       >
         <Button 
-          variant="plus" 
           onClick={() => onUpdate(user.uid)}
-          className="w-full h-full flex justify-center items-center"
+          className="button-plus w-full h-full flex justify-center items-center"
         >
           <motion.div whileTap={{ scale: 0.9 }}>
             <Coffee className="w-6 h-6" />

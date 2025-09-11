@@ -6,6 +6,7 @@ type User = {
   count: number;
 };
 
+
 export function UserCard({ user }: { user: User }) {
   return (
     <motion.div

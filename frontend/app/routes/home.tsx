@@ -55,11 +55,11 @@ export default function Home() {
 
 
   const handleUpdate = async (userUid: string) => {
-    if (uid !== userUid) return; // safeguard
+    if ((uid !== userUid) && (userUid !== "guest")) return; // safeguard
 
     try {
       const res = await fetch(
-        `${API_URL}/update?uid=${uid}`,
+        `${API_URL}/update?uid=${userUid}`,
         { method: "POST" }
       );
       if (!res.ok) throw new Error("Failed to update");
@@ -98,18 +98,24 @@ export default function Home() {
               .filter((user) => user.uid === uid)
               .map((user) => (
                 <LoggedInUserCard
-                  key={`top-${user.uid}`}
                   user={user}
                   onUpdate={handleUpdate}
                 />
               ))}
 
-          {uid && <div className="h-2" />}  {/* Vertical spacer */}
+          {<div className="h-2" />}  {/* Vertical spacer */}
 
           {/* Full sorted list (logged-in user included again) */}
-          {users.map((user) => (
-            <UserCard key={user.uid} user={user} />
-          ))}
+          {users.map((user) =>
+            (user.uid === "guest") && (uid) ? (
+              <LoggedInUserCard
+                user={user}
+                onUpdate={handleUpdate}
+              />
+            ) : (
+              <UserCard key={user.uid} user={user} />
+            )
+          )}
         </AnimatePresence>
       </div>
     </PageWrapper>
